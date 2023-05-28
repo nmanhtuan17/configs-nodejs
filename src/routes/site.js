@@ -1,9 +1,14 @@
 const express = require('express')
-import siteCtrl from '../controler/siteCtrl'
+import { index, showSearch } from '../controler/siteCtrl'
 let router = express.Router()
 
 
 
-router.use('/', siteCtrl.index)
+//search
+router.get('/search', showSearch)
+
+//home
+router.get('/', index)
+
 
 module.exports = router
