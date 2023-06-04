@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(post=> { %>
+                <% stt = stt + 1 %>
+                <tr>
+                    <th scope="row"><%= stt %></th>
+                    <td>
+                        <%= post.name %>
+                    </td>
+                    <td>
+                        <%= post.image %>
+                    </td>
+                    <td>
+                        <%= post.description %>
+                    </td>
+                    <td>
+                        <a href="/post/edit/<%= post._id %>" class="btn btn-link">Edit</a>
+                        <a href="" class="btn btn-link">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+
+        </tbody>
+    </table>
+</div>

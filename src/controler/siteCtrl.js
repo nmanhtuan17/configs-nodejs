@@ -1,13 +1,8 @@
 const Course = require('../models/courseDb')
 // [GET] /
-let index = (req, res)=>{
+let index = async (req, res)=>{
 
-    Course.find({})
-        .then(course => {
-            res.json(course)
-        })
-        
-    // res.render('home.ejs', {title: 'Home'})
+    res.render('home.ejs', {title: 'Home'})
 }
 
 

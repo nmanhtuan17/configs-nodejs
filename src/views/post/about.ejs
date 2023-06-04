@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="post row justify-content-between">
+        <% posts.forEach(post=> { %>
+            <div class="card m-5  col-sm-8 col-md-4 col-lg-2 col-xl-2" style="width: 100%;">
+
+                <img src="<%= post.image  %>" class="card-img-top" alt="...">
+
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= post.name %>
+                    </h5>
+                    <p class="card-text">
+                        <%= post.description %>
+                    </p>
+
+                </div>
+            </div>
+            <% }); %>
+    </div>
+    <form class="row g-3 needs-validation mr-5 ml-5" method="POST" novalidate>
+        <div class="col-md-4">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" class="form-control" id="image" placeholder="url" required>
+
+        </div>
+        <div class="col-md-4">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="name" required>
+        </div>
+        <div class="col-md-4">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description" required>
+        </div>
+
+        <div class="col-12 mt-5">
+            <button class="btn btn-primary" type="submit">Post</button>
+        </div>
+    </form>
+</div>

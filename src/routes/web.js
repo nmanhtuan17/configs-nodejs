@@ -1,13 +1,14 @@
 const express = require('express')
 import siteRoutes from './site'
-import aboutRoutes from './about'
+import postRoutes from './post'
 
 
 const initWebRoute = (app) => {
 
 
-    app.use('/about', aboutRoutes)
+    app.use('/post', postRoutes)
 
+    
     app.use('/', siteRoutes)
 }
 
