@@ -1,5 +1,6 @@
 const express = require('express')
 import postCtrl from '../controler/postCtrl'
+
 let router = express.Router()
 
 
@@ -9,6 +10,7 @@ router.get('/edit', postCtrl.editPost)
 router.get('/edit/:id', postCtrl.editItem)
 
 router.put('/:id', postCtrl.update)
+router.delete('/:id', postCtrl.destroy)
 
 router.post('/', postCtrl.showNewPost)
 

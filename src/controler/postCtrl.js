@@ -48,6 +48,12 @@ let update = async (req, res) => {
     res.redirect('/post/edit')
 }
 
+// DELETE /post/:id
+let destroy = async (req, res) => {
+    await Post.deleteOne({_id: req.params.id})
+    res.redirect('/post/edit')
+}
+
 
 
 
@@ -57,6 +63,6 @@ module.exports = {
     showNewPost,
     editPost,
     editItem,
-    update
-
+    update,
+    destroy
 }
