@@ -3,6 +3,7 @@ var methodOverride = require('method-override')
 import configViewEngine from './configs/viewEngine'
 import initWebRoute from './routes/web'
 import db from './configs/db'
+
 require('dotenv').config()
 
 const app = express()
@@ -15,7 +16,6 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 app.use(methodOverride('_method'))
-
 
 
 const port = process.env.PORT || 8080

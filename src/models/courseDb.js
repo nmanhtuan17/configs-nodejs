@@ -6,8 +6,12 @@ const Course = new Schema({
     description: String,
     image: String
 })
-
+const Post = new Schema({
+    name: String,
+    description: String,
+    image: String
+})
 const courseMd = mongoose.model('Course', Course)
+const postsMd = mongoose.model('Post', Post)
 
-
-module.exports = courseMd
+module.exports = postsMd
