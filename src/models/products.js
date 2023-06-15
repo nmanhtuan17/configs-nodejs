@@ -11,10 +11,10 @@ const User = new Schema({
 
 const Product = new Schema({
     ProductName: String,
-    Price: Number,
+    Price: String,
     Quantity: Number,
     Description: String,
-    Image: String,
+    Image: String
 })
 
 
