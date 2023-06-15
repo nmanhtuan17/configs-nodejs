@@ -1,0 +1,52 @@
+<header>
+    <%- include('../partials/header.ejs') %>
+</header>
+<section>
+    <%- include('../partials/banner.ejs') %>
+</section>
+<div class="container col-md-6 col-lg-6 mt-5 mx-auto">
+    <form method="post" action="/admin/create">
+        <% if (message.length !==0) {%>
+            <div class="alert alert-danger">
+              <%= message %>
+            </div>
+            <% } %>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Product name</label>
+                    <input type="text" id="form6Example1" class="form-control" name="ProductName"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Price</label>
+                    <input type="number" id="form6Example2" class="form-control" name="Price"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Quantity</label>
+                    <input type="number" id="form6Example2" class="form-control" name="Quantity"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text input -->
+        <div class="form-outline mb-3">
+            <label class="form-label" for="form6Example3">Product image</label>
+            <input type="text" id="form6Example3" class="form-control" name="Image"/>
+        </div>
+
+        <!-- Description input -->
+        <div class="form-outline mb-3">
+            <label class="form-label" for="form6Example7">Description</label>
+            <textarea class="form-control" id="form6Example7" rows="4" name="Description"></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-3">Create</button>
+    </form>
+
+</div>
