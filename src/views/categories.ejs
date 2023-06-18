@@ -95,9 +95,10 @@
                                                 <a href="#" class="col-3">
                                                     <i class="ti-heart"></i>
                                                 </a>
-                                                <a href="#" class="col-3">
+                                                <a href="#" class="col-3 btn-cart" data-id="<%= product._id %>">
                                                     <i class="ti-shopping-cart"></i>
                                                 </a>
+                                                
                                                 <% } %>
 
                                     </div>
@@ -150,11 +151,19 @@
 </div>
 
 <form name="delete-form" method="POST"></form>
+<form name="addCart-form" method="POST"></form>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // admin delete product
         var productId
         var deleteForm = document.forms['delete-form']
         var btnDelete = document.getElementById('btn-delete')
+
+        //
+        var productAddCartId
+        var addCartForm = document.forms['addCart-form']
+        var btnAddCarts = document.querySelectorAll('.btn-cart')
+        
         $('#delete-post').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             productId = button.data('id')
@@ -164,6 +173,20 @@
             deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
             deleteForm.submit()
         }
+
+
+        btnAddCarts.forEach((btnAddCart) => {
+        btnAddCart.onclick = function(){
+            productAddCartId = btnAddCart.getAttribute('data-id')
+
+            addCartForm.action = '/user/cart/' + productAddCartId
+            addCartForm.submit() 
+        }
+    })
+
+
+
+        
 
     })
 </script>
