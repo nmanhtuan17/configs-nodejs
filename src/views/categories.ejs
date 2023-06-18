@@ -63,7 +63,7 @@
                         <option value="2">Show 14</option>
                         <option value="3">Show 16</option>
                     </select>
-                    <% if(isLogin && user.Username == 'admin') {%>
+                    <% if(isLogin && user.Username=='admin' ) {%>
                         <!-- <form class="col-3" method="post" action="">
                             <button class="btn" type="submit"> Thêm sản phẩm <i class="fa-solid fa-plus"></i></button>
                         </form> -->
@@ -80,12 +80,12 @@
                                     <img class="card-img" src="<%= product.Image %>" alt="" />
                                     <div class="p_icon row justify-content-around flex-nowrap mx-auto"
                                         style="width: 100%;">
-                                        <% if (isLogin && user.Username == 'admin') {%>
+                                        <% if (isLogin && user.Username=='admin' ) {%>
                                             <a href="#" class="col-3">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
-                                            <a href="" class="col-3" data-toggle="modal"  data-target="#delete-post"
-                                            data-id="<%= product._id %>">
+                                            <a href="" class="col-3" data-toggle="modal" data-target="#delete-post"
+                                                data-id="<%= product._id %>">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                             <% } else { %>
@@ -95,10 +95,11 @@
                                                 <a href="#" class="col-3">
                                                     <i class="ti-heart"></i>
                                                 </a>
-                                                <a href="#" class="col-3 btn-cart" data-id="<%= product._id %>">
+                                                <a href="#" class="col-3 btn-cart btn-success"
+                                                    data-id="<%= product._id %>">
                                                     <i class="ti-shopping-cart"></i>
                                                 </a>
-                                                
+
                                                 <% } %>
 
                                     </div>
@@ -129,28 +130,29 @@
 </footer>
 <!-- Modal xóa sản phẩm -->
 <div class="modal fade" id="delete-post" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Bạn chắc chắn muốn xóa không?
-                </div>
-                <div class="modal-footer">
-                    <button id="btn-delete" type="submit" class="btn btn-danger">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn chắc chắn muốn xóa không?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete" type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<form name="delete-form" method="POST"></form>
+<form name="delete-form" method="POST">
+</form>
 <form name="addCart-form" method="POST"></form>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -159,34 +161,35 @@
         var deleteForm = document.forms['delete-form']
         var btnDelete = document.getElementById('btn-delete')
 
-        //
+        //  add product to cart
+
+
         var productAddCartId
         var addCartForm = document.forms['addCart-form']
         var btnAddCarts = document.querySelectorAll('.btn-cart')
-        
+        btnAddCarts.forEach((btnAddCart) => {
+            btnAddCart.onclick = function () {
+                productAddCartId = btnAddCart.getAttribute('data-id')
+                addCartForm.action = '/user/cart/' + productAddCartId
+                addCartForm.submit()
+            }
+        })
         $('#delete-post').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             productId = button.data('id')
-            
+
         })
-        btnDelete.onclick = function(){
+        btnDelete.onclick = function () {
             deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
             deleteForm.submit()
         }
 
 
-        btnAddCarts.forEach((btnAddCart) => {
-        btnAddCart.onclick = function(){
-            productAddCartId = btnAddCart.getAttribute('data-id')
-
-            addCartForm.action = '/user/cart/' + productAddCartId
-            addCartForm.submit() 
-        }
-    })
 
 
 
-        
+
+
 
     })
 </script>

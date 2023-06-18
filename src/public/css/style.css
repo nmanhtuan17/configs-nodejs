@@ -178,6 +178,14 @@ ul {
       transition: all 300ms linear 0s; }
       .header_area .navbar .icons:hover {
         color: #71cd14; }
+      .header_area .navbar .icons .cart-number {
+        margin-top: -0.1rem;
+        margin-left: -0.5rem;
+        height: 15px;
+        font-size: .6rem;
+        top: 40%;
+        right: 25%;
+        margin-bottom: 0.5rem; }
     @media (max-width: 992px) {
       .header_area .navbar .nav {
         float: left; } }

@@ -11,12 +11,19 @@ let categories = async (req, res) => {
 //
 let addToCart = async (req, res) => {
     let products = await productModel.findById({_id: req.params.id})
-    let newAddToCart = new cartModel({
-        ProductName: products.ProductName,
-
-    })
-    await newAddToCart.save()
-    res.redirect('/')
+    if(req.isAuthenticated()){
+        let userLogin = req.user
+        let newAddToCart = new cartModel({
+            ProductName: products.ProductName,
+            Username: userLogin.Username
+        })
+        await newAddToCart.save()
+        res.redirect('/')
+    }else{
+        res.redirect('/user/login')
+    }
+    
+    
 }
 
 

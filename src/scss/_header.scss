@@ -34,6 +34,15 @@
             &:hover {
                 color: $primary-color;
             }
+            .cart-number{
+                margin-top: -0.1rem;
+                margin-left: -0.5rem;
+                height: 15px;
+                font-size: .6rem;
+                top: 40%;
+                right: 25%;
+                margin-bottom: 0.5rem;
+            }
         }
         .nav {
             @media (max-width: 992px) {
