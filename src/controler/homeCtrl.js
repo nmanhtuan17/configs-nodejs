@@ -2,9 +2,15 @@ import { productModel } from "../models/products"
 import cartModel from '../models/cart'
 
 //GET /
-let categories = async (req, res) => {
+let home = async (req, res) => {
     let products = await productModel.find({})
-    res.render('categories.ejs', {title: 'Home', bannerText: 'Categories', products: products, isLogin: req.isAuthenticated(), user: req.user})
+    var countCart = []
+    if(req.isAuthenticated()){
+        let userLogin = req.user
+        countCart = await cartModel.find({Username: userLogin.Username})
+    }
+    
+    res.render('home.ejs', {title: 'Home', bannerText: 'Home', products: products, isLogin: req.isAuthenticated(), user: req.user, countCart: countCart.length})
 }
 
 
@@ -18,7 +24,7 @@ let addToCart = async (req, res) => {
             Username: userLogin.Username
         })
         await newAddToCart.save()
-        res.redirect('/')
+        res.redirect('back')
     }else{
         res.redirect('/user/login')
     }
@@ -31,6 +37,6 @@ let addToCart = async (req, res) => {
 
 
 module.exports = {
-    categories,
+    home,
     addToCart
 }

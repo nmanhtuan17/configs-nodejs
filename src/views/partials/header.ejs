@@ -34,7 +34,7 @@
                   <a href="#" class="icons">
                     <i class="ti-shopping-cart"></i>
                     <% if (isLogin && user.Username != 'admin') { %>
-                      <span class="cart-number px-1 rounded-pill bg-danger" style="color: #fff;">0</span>
+                      <span class="cart-number px-1 rounded-pill bg-danger" style="color: #fff;"><%= countCart %></span>
                     <% } %>
                   </a>
                 </li>

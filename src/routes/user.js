@@ -12,6 +12,9 @@ initPassport()
 router.get('/login', loginCtrl.checkLoggedOut, loginCtrl.getLoginPage)
 router.get('/register', registerCtrl.register)
 
+
+
+
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/user/login',
