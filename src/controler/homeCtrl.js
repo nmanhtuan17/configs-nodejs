@@ -10,7 +10,7 @@ let home = async (req, res) => {
         countCart = await cartModel.find({Username: userLogin.Username})
     }
     
-    res.render('home.ejs', {title: 'Home', bannerText: 'Home', products: products, isLogin: req.isAuthenticated(), user: req.user, countCart: countCart.length})
+    res.render('home.ejs', {title: 'Home', products: products, isLogin: req.isAuthenticated(), user: req.user, countCart: countCart.length})
 }
 
 

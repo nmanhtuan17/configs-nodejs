@@ -9,7 +9,7 @@ let getSingleProduct = async (req, res) => {
         countCart = await cartModel.find({Username: userLogin.Username})
     }
     res.render('single-product.ejs', {
-        title: 'Single Product',
+        title: 'Details',
         isLogin: req.isAuthenticated(),
         product: product,
         user: req.user,

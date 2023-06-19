@@ -2,7 +2,7 @@ import { userModel } from "../models/products"
 // GET /login
 let getLoginPage = (req, res) => {
 
-    res.render('login.ejs', { title: 'Account', bannerText: 'Login', message: req.flash('msg')})
+    res.render('login.ejs', { title: 'Account', message: req.flash('msg')})
 }
 
 

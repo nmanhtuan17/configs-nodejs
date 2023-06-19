@@ -4,7 +4,7 @@ import { userModel } from '../models/products'
 //GET /register
 
 let register = (req, res) => {
-    res.render('register', { title: 'Register', bannerText: 'Register', message: req.flash('msg') })
+    res.render('register', { title: 'Register', message: req.flash('msg') })
 }
 
 

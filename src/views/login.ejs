@@ -1,5 +1,20 @@
 <section>
-  <%- include('./partials/banner.ejs') %>
+  <%- include('./partials/topmenu.ejs')  %>
+</section>
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div class="container">
+      <div class="banner_content d-md-flex justify-content-between align-items-center">
+        <div class="mb-3 mb-md-0">
+          <h2>Login</h2>
+        </div>
+        <div class="page_link">
+          <a href="/">Home</a>
+          <a href="#">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <form class="col-md-6 col-lg-4 mx-auto my-5" method="POST" action="/user/login">
   <% if (message.length !==0) {%>
