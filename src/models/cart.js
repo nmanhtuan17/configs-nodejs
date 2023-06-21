@@ -5,7 +5,10 @@ const Cart = new Schema({
     ProductName: String,
     Username: String,
     Quantity: Number,
-    
+    Price: String,
+    Image: String,
+    Description: String
+
 })
 
 

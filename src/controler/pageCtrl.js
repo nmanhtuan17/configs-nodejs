@@ -17,8 +17,26 @@ let getSingleProduct = async (req, res) => {
     })
 }
 
+let getCart = async  (req, res) => {
+    var orders = []
+    if(req.isAuthenticated()){
+        let userLogin = req.user
+        orders = await cartModel.find({Username: userLogin.Username})
+    }
+    res.render('cart.ejs', {
+        title: 'Cart',
+        isLogin: req.isAuthenticated(),
+        user: req.user,
+        countCart: orders.length,
+        products: orders,
+    })
+
+}
+
 
 
 module.exports = {
-    getSingleProduct
+    getSingleProduct,
+    getCart
+
 }

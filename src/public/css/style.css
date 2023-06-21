@@ -2777,10 +2777,10 @@ h6 {
       color: #797979; }
     .single-product .product-btm span {
       font-family: "Heebo", sans-serif;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 500;
       line-height: 16px;
-      color: #2a2a2a; }
+      color: #d70018; }
   .single-product:hover .product-img .p_icon {
     bottom: 0px; }
   .single-product:hover .product-btm h4 {
@@ -3338,7 +3338,8 @@ h6 {
     padding-right: 30px; }
     .cart_inner .table tbody tr td .media .d-flex img {
       border: 1px solid #eeeeee;
-      border-radius: 3px; }
+      border-radius: 3px;
+      max-width: 100px; }
   .cart_inner .table tbody tr td .media .media-body {
     vertical-align: middle;
     align-self: center; }

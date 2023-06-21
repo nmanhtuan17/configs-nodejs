@@ -5,6 +5,8 @@ const configViewEngine = (app) => {
     app.use(express.static(path.join(__dirname,'../public')))
     app.use('/user',express.static(path.join(__dirname,'../public')))
     app.use('/admin',express.static(path.join(__dirname,'../public')))
+    app.use('/admin/update',express.static(path.join(__dirname,'../public')))
+
     app.use('/page',express.static(path.join(__dirname,'../public')))
 
 

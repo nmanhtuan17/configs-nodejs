@@ -1,11 +1,8 @@
-<header>
-    <%- include('../partials/header.ejs') %>
-</header>
 <section>
-    <%- include('../partials/banner.ejs') %>
+    <%- include('../partials/topmenu')  %>
 </section>
 <div class="container col-md-6 col-lg-6 mt-5 mx-auto">
-    <form method="post" action="/admin/create">
+    <form method="post" action="/admin/update/<%= productUpdate._id %>?_method=PUT">
         <% if (message.length !==0) {%>
             <div class="alert alert-primary">
               <%= message %>
@@ -16,19 +13,19 @@
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example1">Product name</label>
-                    <input type="text" id="form6Example1" class="form-control" name="ProductName"/>
+                    <input type="text" id="form6Example1" class="form-control" name="ProductName" value="<%= productUpdate.ProductName %>"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example2">Price</label>
-                    <input type="text" id="form6Example2" class="form-control" name="Price"/>
+                    <input type="text" id="form6Example2" class="form-control" name="Price" value="<%= productUpdate.Price %>"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example2">Quantity</label>
-                    <input type="number" id="form6Example2" class="form-control" name="Quantity"/>
+                    <input type="number" id="form6Example2" class="form-control" name="Quantity" value="<%= productUpdate.Quantity %>"/>
                 </div>
             </div>
         </div>
@@ -36,17 +33,17 @@
         <!-- Text input -->
         <div class="form-outline mb-3">
             <label class="form-label" for="form6Example3">Product image</label>
-            <input type="text" id="form6Example3" class="form-control" name="Image"/>
+            <input type="text" id="form6Example3" class="form-control" name="Image" value="<%= productUpdate.Image %>"/>
         </div>
 
         <!-- Description input -->
         <div class="form-outline mb-3">
             <label class="form-label" for="form6Example7">Description</label>
-            <textarea class="form-control" id="form6Example7" rows="4" name="Description"></textarea>
+            <textarea class="form-control" id="form6Example7" rows="4" name="Description"><%= productUpdate.Description %></textarea>
         </div>
 
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-3">Create</button>
+        <button type="submit" class="btn btn-primary btn-block mb-3">Update</button>
     </form>
 
 </div>

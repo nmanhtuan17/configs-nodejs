@@ -55,10 +55,11 @@
     }
     span {
       font-family: $title-font;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 500;
       line-height: 16px;
-      color: $title-color;
+      // color: $title-color;
+      color: #d70018;
     }
   }
   &:hover {
@@ -803,6 +804,7 @@
               img {
                 border: 1px solid #eeeeee;
                 border-radius: 3px;
+                max-width: 100px;
               }
             }
             .media-body {

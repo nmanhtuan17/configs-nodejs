@@ -16,14 +16,14 @@
                     <form action="">
                         <div class="widgets_inner">
                             <ul class="list">
-                                <li>
+                                <li class="active">
                                     <a href="#">Apple</a>
                                 </li>
                                 <li>
                                     <a href="#">Asus</a>
                                 </li>
-                                <li class="active">
-                                    <a href="#">Gionee</a>
+                                <li >
+                                    <a href="#">Xiaomi</a>
                                 </li>
                                 <li>
                                     <a href="#">Micromax</a>
@@ -82,7 +82,7 @@
                                     <div class="p_icon row justify-content-around flex-nowrap mx-auto"
                                         style="width: 100%;">
                                         <% if (isLogin && user.Username=='admin' ) {%>
-                                            <a href="#" class="col-3">
+                                            <a href="/admin/update/<%= product._id %>" class="col-3">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
                                             <a href="" class="col-3" data-toggle="modal" data-target="#delete-post"

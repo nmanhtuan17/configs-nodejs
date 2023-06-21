@@ -1,5 +1,11 @@
 import { productModel } from "../../models/products";
 
+
+// // Get /admin/
+// let getAdminPage = (req, res) => {
+//     res.render('admin/adminPage')
+// }
+
 //delete /admin/delete/:id
 
 let postDeleteProduct = async (req, res) => {
@@ -9,7 +15,7 @@ let postDeleteProduct = async (req, res) => {
 
 //get /admin/create
 
-let getCreate = async (req, res) => 
+let getCreate = (req, res) => 
 {
 
     res.render('admin/adminCreate.ejs', {
@@ -34,8 +40,35 @@ let postCreate = async (req, res) => {
     req.flash('msg', 'Thêm thành công')
     res.redirect('/admin/create')
 }
+
+let getUpdateProduct = async (req, res) => {
+    var productUpdate = await productModel.findById({_id: req.params.id})
+    res.render('admin/adminUpdate', {
+        title: 'Update',
+        message: req.flash('msg'),
+        productUpdate: productUpdate
+    })
+}
+
+
+let putUpdateProduct = async (req, res) => {
+    var prod = await productModel.findById({_id: req.params.id})
+    var data = req.body
+    prod.ProductName = data.ProductName
+    prod.Price = data.Price
+    prod.Quantity = data.Quantity
+    prod.Image = data.Image
+    prod.Description = data.Description
+
+    await prod.save()
+    req.flash('msg', 'Cập nhật thành công')
+    res.redirect('/admin')
+}
 module.exports = {
+    // getAdminPage,
     postDeleteProduct,
     getCreate,
-    postCreate
+    postCreate,
+    getUpdateProduct,
+    putUpdateProduct
 }
