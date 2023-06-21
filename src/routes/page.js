@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 
-router.get('/cart',loginCtrl.checkLoggedIn , pageCtrl.getCart)
+router.get('/cart', pageCtrl.getCart)
 router.get('/:id', pageCtrl.getSingleProduct)
 
 

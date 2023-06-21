@@ -22,15 +22,17 @@ let getCart = async  (req, res) => {
     if(req.isAuthenticated()){
         let userLogin = req.user
         orders = await cartModel.find({Username: userLogin.Username})
+        res.render('cart.ejs', {
+            title: 'Cart',
+            isLogin: req.isAuthenticated(),
+            user: req.user,
+            countCart: orders.length,
+            products: orders,
+        })
+    }else{
+        res.redirect('/user/login')
     }
-    res.render('cart.ejs', {
-        title: 'Cart',
-        isLogin: req.isAuthenticated(),
-        user: req.user,
-        countCart: orders.length,
-        products: orders,
-    })
-
+        
 }
 
 
