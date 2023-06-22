@@ -5,8 +5,7 @@ import passport from 'passport'
 import loginCtrl from '../controler/loginCtrl'
 import registerCtrl from '../controler/registerCtrl'
 import initPassport from '../controler/passportLocalCtrl'
-import homeCtrl from '../controler/homeCtrl'
-
+import cartCtrl from '../controler/cartCtrl'
 initPassport()
 
 router.get('/login', loginCtrl.checkLoggedOut, loginCtrl.getLoginPage)
@@ -24,6 +23,9 @@ router.post('/login', passport.authenticate('local', {
 }))
 router.post('/register', registerCtrl.createUser)
 router.post('/logout', loginCtrl.postLogOut)
-router.post('/cart/:id', homeCtrl.addToCart)
+
+
+
+router.post('/cart/:id', cartCtrl.addToCart)
 
 module.exports = router

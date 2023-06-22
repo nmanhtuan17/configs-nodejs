@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/cart', pageCtrl.getCart)
 router.get('/:id', pageCtrl.getSingleProduct)
-
+router.get('/', pageCtrl.getCheckout)
 
 
 

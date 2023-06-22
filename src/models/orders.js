@@ -5,7 +5,12 @@ const Order = new Schema({
     Address:String,
     Phone: String,
     ProductName: String,
-    Username: String 
+    Customer: String,
+    Quantity: Number,
+    TotalAmount: Number,
+    Status: String,
+    PaymentMethod: String
+
 })
 
 

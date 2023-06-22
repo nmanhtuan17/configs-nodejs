@@ -5,12 +5,11 @@ import cartModel from '../models/cart'
 let home = async (req, res) => {
     let products = await productModel.find({})
     var countCart = []
-    var isAdmin = req.user
+    var userLogin = req.user
     if(req.isAuthenticated()){
-        let userLogin = req.user
         countCart = await cartModel.find({Username: userLogin.Username})
     }
-    if(req.isAuthenticated() && isAdmin.Admin){
+    if(req.isAuthenticated() && userLogin.Admin){
         res.render('admin/adminPage', {
             title: 'Admin page',
             isLogin: req.isAuthenticated(),
@@ -20,35 +19,6 @@ let home = async (req, res) => {
         res.render('home.ejs', {title: 'Home', products: products, isLogin: req.isAuthenticated(), user: req.user, countCart: countCart.length})
     }
 }
-
-
-//
-let addToCart = async (req, res) => {
-    let product = await productModel.findById({_id: req.params.id})
-    if(req.isAuthenticated()){
-        let userLogin = req.user
-        let newAddToCart = new cartModel({
-            ProductName: product.ProductName,
-            Price: product.Price,
-            //Quantity: product.Quantity,
-            Image: product.Image,
-            Description: product.Description,
-            Username: userLogin.Username
-        })
-        await newAddToCart.save()
-        res.redirect('back')
-    }else{
-        res.redirect('/user/login')
-    }
-    
-    
-}
-
-
-
-
-
 module.exports = {
-    home,
-    addToCart
+    home
 }

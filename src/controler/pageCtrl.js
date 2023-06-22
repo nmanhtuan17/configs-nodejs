@@ -17,6 +17,8 @@ let getSingleProduct = async (req, res) => {
     })
 }
 
+
+// GET /page/cart
 let getCart = async  (req, res) => {
     var orders = []
     if(req.isAuthenticated()){
@@ -35,10 +37,16 @@ let getCart = async  (req, res) => {
         
 }
 
-
+let getCheckout =  (req, res) => {
+    res.render('checkout.ejs',
+    {
+        title: 'Product Checkout'
+    })
+}
 
 module.exports = {
     getSingleProduct,
-    getCart
+    getCart,
+    getCheckout
 
 }
