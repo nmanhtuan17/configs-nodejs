@@ -36,43 +36,40 @@
                     </thead>
                     <tbody>
                         <% products.forEach(product => { %>
+                            
                             <tr>
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="<%= product.Image  %>" alt="" />
+                                            <img src="<%= product.Image %>" alt="" />
                                         </div>
                                         <div class="media-body">
-                                            <p><%= product.ProductName  %></p>
+                                            <p><%= product.ProductName %></p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$<%= product.Price  %></h5>
+                                    <h5 class="product-price" style="display: inline-block;"><%= product.Price %></h5>
+                                    <i class="fa-solid fa-dong-sign"></i>
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" class="product-sst" maxlength="12" value="1" title="Quantity:"
+                                        <input type="number" name="quantity" id="sst" class="product-sst" maxlength="12" value="<%= product.Quantity %>" title="Quantity:"
                                             class="input-text qty" />
-                                        <button class="btn-product-sst-up"
-                                            onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                            <i class="lnr lnr-chevron-up"></i>
-                                        </button>
-                                        <button class="btn-product-sst-down"
-                                            onclick="var result = document.getElementById('sst'); var sst = result.value; if( sst > 0 ) result.value--;"
-                                            class="reduced items-count" type="button">
-                                            <i class="lnr lnr-chevron-down"></i>
-                                        </button>
                                     </div>
                                 </td>
+                                
                                 <td>
-                                    <h5>$720.00</h5>
+                                    <h5 style="display: inline-block;"><%= (parseFloat(product.Price) * product.Quantity).toFixed(6)  %></h5>
+                                    
+                                    <i class="fa-solid fa-dong-sign"></i>
                                 </td>
+                                <td>
+                                    <a type="button" href="#"data-id="<%= product._id %>" data-bs-toggle="modal" data-bs-target="#delete-post">Xóa</a>
+                                </td>
+                                
                             </tr>
                         <% }) %>
-                        
-                        
                         <tr>
                             <td></td>
                             <td></td>
@@ -80,7 +77,8 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
+                                <h5 style="display: inline-block;"><%= total %></h5>
+                                <i class="fa-solid fa-dong-sign"></i>
                             </td>
                         </tr>
                         <tr class="out_button_area">
@@ -110,3 +108,40 @@
 <footer>
     <%- include('./partials/footer') %>
 </footer>
+<div class="modal fade" id="delete-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Bạn chắc chắn muốn xóa sản phẩm khỏi giỏ hàng không?
+        </div>
+        <div class="modal-footer">
+            <button type="submit"id="btn-delete" class="btn btn-danger">Xóa khỏi giỏ hàng</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<form name="delete-form" method="POST">
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // admin delete product
+        var productId
+        var deleteForm = document.forms['delete-form']
+        var btnDelete = document.getElementById('btn-delete')
+        $('#delete-post').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            productId = button.data('id')
+
+        })
+        btnDelete.onclick = function () {
+            deleteForm.action = '/page/cart/' + productId + '?_method=DELETE'
+            deleteForm.submit()
+        }
+    })
+</script>

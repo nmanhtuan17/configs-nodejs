@@ -6,6 +6,7 @@ const router = express.Router()
 
 
 router.get('/cart', pageCtrl.getCart)
+router.delete('/cart/:id', pageCtrl.deleteProductFromCart)
 router.get('/:id', pageCtrl.getSingleProduct)
 router.get('/', pageCtrl.getCheckout)
 
