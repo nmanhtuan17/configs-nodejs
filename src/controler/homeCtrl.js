@@ -10,11 +10,7 @@ let home = async (req, res) => {
         countCart = await cartModel.find({Username: userLogin.Username})
     }
     if(req.isAuthenticated() && userLogin.Admin){
-        res.render('admin/adminPage', {
-            title: 'Admin page',
-            isLogin: req.isAuthenticated(),
-            user: req.user
-        })
+        res.redirect('/admin/')
     }else{
         res.render('home.ejs', {title: 'Home', products: products, isLogin: req.isAuthenticated(), user: req.user, countCart: countCart.length})
     }

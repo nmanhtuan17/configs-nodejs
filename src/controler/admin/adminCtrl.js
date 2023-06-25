@@ -1,10 +1,18 @@
 import { productModel } from "../../models/products";
+import { userModel } from "../../models/products";
 
-
-// // Get /admin/
-// let getAdminPage = (req, res) => {
-//     res.render('admin/adminPage')
-// }
+// Get /admin/
+let getAdminPage = async (req, res) => {
+    let allProduct = await productModel.find({})
+    var stt = 1
+    res.render('admin/adminPage', {
+        title: 'Admin page',
+        isLogin: req.isAuthenticated(),
+        user: req.user,
+        products: allProduct,
+        stt: stt,
+    })
+}
 
 //delete /admin/delete/:id
 
@@ -20,7 +28,6 @@ let getCreate = (req, res) =>
 
     res.render('admin/adminCreate.ejs', {
         title: 'Create',
-        bannerText: 'Thêm sản phẩm',
         isLogin: req.isAuthenticated(),
         user: req.user,
         message: req.flash('msg')
@@ -64,11 +71,31 @@ let putUpdateProduct = async (req, res) => {
     req.flash('msg', 'Cập nhật thành công')
     res.redirect('/admin')
 }
+
+
+// get /admin/customer
+let getCustomer = async (req, res) => {
+    let allUsers = await userModel.find({})
+    var stt = 1
+    res.render('admin/adminCustomer', {
+        title: 'Khách hàng',
+        isLogin: req.isAuthenticated(),
+        user: req.user,
+        allUsers: allUsers,
+        stt: stt,
+    })
+}
+
+let deleteCustomer = ()=> {
+
+}
 module.exports = {
-    // getAdminPage,
+    getAdminPage,
     postDeleteProduct,
     getCreate,
     postCreate,
     getUpdateProduct,
-    putUpdateProduct
+    putUpdateProduct,
+    getCustomer,
+    deleteCustomer
 }

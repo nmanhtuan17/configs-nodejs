@@ -12,6 +12,7 @@ router.delete('/delete/:id', adminCtrl.postDeleteProduct)
 router.get('/update/:id', adminCtrl.getUpdateProduct)
 router.put('/update/:id', adminCtrl.putUpdateProduct)
 
-
-// router.get('/', adminCtrl.getAdminPage)
+router.get('/customer', adminCtrl.getCustomer)
+router.delete('/customer/:id', adminCtrl.deleteCustomer)
+router.get('/', adminCtrl.getAdminPage)
 module.exports = router

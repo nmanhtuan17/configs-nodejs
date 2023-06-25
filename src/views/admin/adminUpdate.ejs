@@ -1,6 +1,33 @@
-<section>
-    <%- include('../partials/topmenu')  %>
-</section>
+<div class="top_menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          
+        </div>
+        <div class="col-lg-5">
+          <div class="float-right">
+            <ul class="right_side">
+              <li>
+                <a href="/admin/">
+                  Kho hàng
+                </a>
+              </li>
+              <li>
+                <a href="/admin/orders">
+                  Đơn hàng
+                </a>
+              </li>
+              <li>
+                <a href="/admin/customer">
+                  Khách hàng
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="container col-md-6 col-lg-6 mt-5 mx-auto">
     <form method="post" action="/admin/update/<%= productUpdate._id %>?_method=PUT">
         <% if (message.length !==0) {%>
@@ -12,19 +39,19 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="form-outline">
-                    <label class="form-label" for="form6Example1">Product name</label>
+                    <label class="form-label" for="form6Example1">Tên sản phẩm</label>
                     <input type="text" id="form6Example1" class="form-control" name="ProductName" value="<%= productUpdate.ProductName %>"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
-                    <label class="form-label" for="form6Example2">Price</label>
+                    <label class="form-label" for="form6Example2">Giá</label>
                     <input type="text" id="form6Example2" class="form-control" name="Price" value="<%= productUpdate.Price %>"/>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
-                    <label class="form-label" for="form6Example2">Quantity</label>
+                    <label class="form-label" for="form6Example2">Số lượng</label>
                     <input type="number" id="form6Example2" class="form-control" name="Quantity" value="<%= productUpdate.Quantity %>"/>
                 </div>
             </div>
@@ -32,18 +59,18 @@
 
         <!-- Text input -->
         <div class="form-outline mb-3">
-            <label class="form-label" for="form6Example3">Product image</label>
+            <label class="form-label" for="form6Example3">Ảnh sản phẩm</label>
             <input type="text" id="form6Example3" class="form-control" name="Image" value="<%= productUpdate.Image %>"/>
         </div>
 
         <!-- Description input -->
         <div class="form-outline mb-3">
-            <label class="form-label" for="form6Example7">Description</label>
+            <label class="form-label" for="form6Example7">Mô tả</label>
             <textarea class="form-control" id="form6Example7" rows="4" name="Description"><%= productUpdate.Description %></textarea>
         </div>
 
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-3">Update</button>
+        <button type="submit" class="btn btn-primary btn-block mb-3">Cập nhật</button>
     </form>
 
 </div>

@@ -69,34 +69,28 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Product</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Price</th>
+        <th scope="col">Tài khoản</th>
+        <th scope="col">Mật khẩu</th>
+        <th scope="col">Email</th>
+        <th scope="col">Admin</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% products.forEach(product => { %>
+      <% allUsers.forEach(el => { %>
         
         <tr>
           <th scope="row"><%= stt++ %></th>
-          <td><%= product.ProductName %></td>
-          <td><%= product.Quantity %></td>
-          <td><%= product.Price %><i class="fa-solid fa-dong-sign"></i></td>
+          <td><%= el.Username %></td>
+          <td><%= el.Password %></td>
+          <td><%= el.Email %></td>
+          <td><%= el.Admin %></td>
           <td>
-            <a href="/admin/update/<%= product._id %>" class="p-2">Sửa</a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= product._id %>">Xóa</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= el._id %>">Xóa</a>
           </td>
         </tr>
         
       <% }) %>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a href="/admin/create" class="p-2">Add <i class="fa-solid fa-plus fa-xs"></i></a></td>
-      </tr>
     </tbody>
   </table>
 </div>

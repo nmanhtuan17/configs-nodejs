@@ -1,9 +1,48 @@
-<header>
-    <%- include('../partials/header.ejs') %>
-</header>
-<section>
-    <%- include('../partials/banner.ejs') %>
-</section>
+<div class="top_menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          
+        </div>
+        <div class="col-lg-5">
+          <div class="float-right">
+            <ul class="right_side">
+              <li>
+                <a href="/admin/">
+                  Kho hàng
+                </a>
+              </li>
+              <li>
+                <a href="/admin/orders">
+                  Đơn hàng
+                </a>
+              </li>
+              <li>
+                <a href="/admin/customer">
+                  Khách hàng
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h2>Thêm sản phẩm</h2>
+          </div>
+          <div class="page_link">
+            <a href="/admin/">Admin</a>
+            <a href="#">Add Product</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 <div class="container col-md-6 col-lg-6 mt-5 mx-auto">
     <form method="post" action="/admin/create">
         <% if (message.length !==0) {%>
