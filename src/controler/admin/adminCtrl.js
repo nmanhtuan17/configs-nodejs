@@ -90,6 +90,20 @@ let deleteCustomer = async (req, res)=> {
     await userModel.deleteOne({_id: req.params.id})
     res.redirect('/admin/customer')
 }
+
+
+// GET /admin/orders
+let getOrders = async (req, res) => {
+    let allProduct = await productModel.find({})
+    var stt = 1
+    res.render('admin/adminOrders', {
+        title: 'Đơn hàng',
+        isLogin: req.isAuthenticated(),
+        user: req.user,
+        products: allProduct,
+        stt: stt,
+    })
+}
 module.exports = {
     getAdminPage,
     postDeleteProduct,
@@ -98,5 +112,6 @@ module.exports = {
     getUpdateProduct,
     putUpdateProduct,
     getCustomer,
-    deleteCustomer
+    deleteCustomer,
+    getOrders
 }

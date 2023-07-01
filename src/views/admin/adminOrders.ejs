@@ -1,0 +1,137 @@
+<header class="header_area">
+    <div class="main_menu">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a class="navbar-brand logo_h" href="/">
+            <img src="img/logo.png" alt="" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
+            <div class="row w-100 mr-0">
+              <div class="col-lg-7 pr-0">
+                <ul class="nav navbar-nav center_nav pull-right">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/">Kho hàng</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/orders">Đơn hàng</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/customer">QL Người dùng</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-5 pr-0">
+                <ul class="nav navbar-nav navbar-right right_nav pull-right">
+                  <li class="nav-item nav-item-icon dropdown">
+                    <a class=" dropdown-toggle icons" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ti-user" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+  
+                      <% if (isLogin) {%>
+                        <li><a class="dropdown-item" href="#">
+                            <%= user.Username %>
+                          </a></li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+                        <form method="POST" action="/user/logout">
+                          <li><button class="dropdown-item" type="submit">Logout</button></li>
+                        </form>
+  
+  
+                        <% } else { %>
+                          <li><a class="dropdown-item" href="/user/login">Login</a></li>
+  
+                          <li><a class="dropdown-item" href="/user/register">Register</a></li>
+                          <% } %>
+                    </ul>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container mt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Khách hàng</th>
+          <th scope="col">Địa chỉ</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Giá</th>
+          <th scope="col">Trạng Thái</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          
+          <tr>
+            <th scope="row"><%= stt++ %></th>
+            <td><%= product.ProductName %></td>
+            <td><%= Math.random() * (99999999999999999 - 1000000000) + 1000000000 %></td>
+            <td>xyzahoiqwnlsnlw</td>
+            <td>1</td>
+            <td><%= product.Price %><i class="fa-solid fa-dong-sign"></i></td>
+            <td>Đang giao hàng</td>
+            <td>
+              <a href="/admin/update/<%= product._id %>" class="p-2">Sửa</a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= product._id %>">Xóa</a>
+            </td>
+          </tr>
+          
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="modal fade" id="delete-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Bạn chắc chắn muốn xóa không?
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btn-delete" class="btn btn-danger">Xóa</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <form name="delete-form" method="POST"></form>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // admin delete product
+        var productId
+        var deleteForm = document.forms['delete-form']
+        var btnDelete = document.getElementById('btn-delete')
+        $('#delete-post').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            productId = button.data('id')
+        })
+        btnDelete.onclick = function () {
+            deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
+            deleteForm.submit()
+        }
+    })
+  </script>

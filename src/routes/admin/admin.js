@@ -14,5 +14,11 @@ router.put('/update/:id', adminCtrl.putUpdateProduct)
 
 router.get('/customer',loginCtrl.checkLoggedIn, adminCtrl.getCustomer)
 router.delete('/customer/:id', adminCtrl.deleteCustomer)
+
+
+router.get('/orders',loginCtrl.checkLoggedIn, adminCtrl.getOrders)
+
 router.get('/',loginCtrl.checkLoggedIn, adminCtrl.getAdminPage)
+
+
 module.exports = router
