@@ -78,7 +78,7 @@ let getCustomer = async (req, res) => {
     let allUsers = await userModel.find({})
     var stt = 1
     res.render('admin/adminCustomer', {
-        title: 'Khách hàng',
+        title: 'Users',
         isLogin: req.isAuthenticated(),
         user: req.user,
         allUsers: allUsers,
