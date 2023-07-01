@@ -33,7 +33,7 @@
                 <li class="nav-item nav-item-icon">
                   <a href="/page/cart" class="icons">
                     <i class="ti-shopping-cart"></i>
-                    <% if (isLogin && user.Username != 'admin') { %>
+                    <% if (isLogin && !user.Amin) { %>
                       <span class="cart-number px-1 rounded-pill bg-danger" style="color: #fff;"><%= countCart %></span>
                     <% } %>
                   </a>
@@ -51,7 +51,7 @@
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 
                     <% if (isLogin) {%>
-                      <li><a class="dropdown-item" href="#">
+                      <li><a class="dropdown-item" href="/user/detail">
                           <%= user.Username %>
                         </a></li>
                         <li>

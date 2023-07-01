@@ -1,0 +1,180 @@
+<section>
+    <%- include('./partials/topmenu.ejs') %>
+</section>
+<header>
+    <%- include('./partials/header') %>
+</header>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<div class="container mb-4 main-container mt-5">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+
+                <div class="author-card-profile d-flex">
+                    <div class="author-card-avatar me-3" style="font-size: 50px;"><i class="fa-solid fa-user"></i></div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg">
+                            <%= user.Username %>
+                        </h5><span class="author-card-position">
+                            <%= user._id %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <a class="list-group-item order-list-nav active" href="#">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fa fa-shopping-bag mr-1 text-muted"></i>
+                                <div class="d-inline-block">
+                                    Orders List
+                                </div>
+                            </div><span class="badge badge-secondary">6</span>
+                        </div>
+                    </a>
+                    <a class="list-group-item profile-setting-nav" href="#">
+                        <i class="fa fa-user text-muted"></i>
+                        <span class="ms-1">Profile Settings</span>
+                    </a>
+                    <!-- <a class="list-group-item" href="#">
+                        <i class="fa fa-map-marker text-muted"></i>
+                        <span class="ms-1">Address</span>
+                    </a> -->
+                    
+                    
+                </nav>
+            </div>
+        </div>
+        <!-- Orders Table-->
+        <div class="col-lg-8 pb-5 " id="orders-table">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Date Purchased</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
+                            <td>August 08, 2017</td>
+                            <td><span class="badge badge-danger m-0">Canceled</span></td>
+                            <td><span>$760.50</span></td>
+                        </tr>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
+                            <td>July 21, 2017</td>
+                            <td><span class="badge badge-info m-0">In Progress</span></td>
+                            <td>$315.20</td>
+                        </tr>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
+                            <td>June 15, 2017</td>
+                            <td><span class="badge badge-warning m-0">Delayed</span></td>
+                            <td>$1,264.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
+                            <td>May 19, 2017</td>
+                            <td><span class="badge badge-success m-0">Delivered</span></td>
+                            <td>$198.35</td>
+                        </tr>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
+                            <td>April 04, 2017</td>
+                            <td><span class="badge badge-success m-0">Delivered</span></td>
+                            <td>$2,133.90</td>
+                        </tr>
+                        <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
+                            <td>March 30, 2017</td>
+                            <td><span class="badge badge-success m-0">Delivered</span></td>
+                            <td>$86.40</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Profile setting -->
+        <div id="profile-setting" class="col-lg-8 pb-5 "style="display: none;">
+            <form method="post" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-fn">Full Name</label>
+                        <input class="form-control" type="text" id="account-fn" value="<%= user.Fullname %>" required="" name="fullname">
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">E-mail Address</label>
+                        <input class="form-control" type="email" id="account-email" value="<%= user.Email %>" disabled="" name="email">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-phone">Phone Number</label>
+                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="" name="phoneNumber">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-pass">New Password</label>
+                        <input class="form-control" type="password" id="account-pass" name="password">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-confirm-pass">Confirm Password</label>
+                        <input class="form-control" type="password" id="account-confirm-pass" name="confirmPassword">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="custom-control custom-checkbox d-block">
+                            <input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
+                            <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
+                        </div>
+                        <button class="btn btn-style-1 btn-primary" type="submit" >Update Profile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var orderListNav = document.querySelector('.order-list-nav')
+    var profileSettingNav = document.querySelector('.profile-setting-nav')
+    var orderTable = document.getElementById('orders-table')
+    var profileSetting = document.getElementById('profile-setting')
+
+    
+    orderListNav.addEventListener('click', ()=>{
+        orderListNav.classList.add('active')
+        profileSettingNav.classList.remove('active')
+        orderTable.style.display = ''
+        profileSetting.style.display = 'none'
+    })
+    profileSettingNav.addEventListener('click', ()=>{
+        profileSettingNav.classList.add('active')
+        orderListNav.classList.remove('active')
+        orderTable.style.display = 'none'
+        profileSetting.style.display = ''
+    })
+</script>
+
+<footer>
+    <%- include('./partials/footer') %>
+</footer>

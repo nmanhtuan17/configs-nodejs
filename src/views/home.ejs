@@ -5,7 +5,7 @@
     <%- include('./partials/header.ejs') %>
 </header>
 
-<section class="cat_product_area section_gap">
+<section class="cat_product_area section_gap ">
     <div class="row container mx-auto">
         <div class="col-lg-3">
             <div class="left_sidebar_area">
@@ -54,26 +54,30 @@
         <div class="col-lg-9">
             <div class="product_top_bar">
                 <div class="left_dorp row">
-                    <select class="sorting">
+                    <select class="sorting col">
                         <option value="1">Sắp xếp theo..</option>
                         <option value="2">Giá tăng dần</option>
                         <option value="3">Giá giảm dần</option>
                     </select>
-                    <select class="show">
-                        <option value="1">Show 12</option>
-                        <option value="2">Show 14</option>
-                        <option value="3">Show 16</option>
-                    </select>
+                    <div class="form-group col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control inputSearch" placeholder="Search Keyword" name="searchText">
+                            <div class="input-group-append">
+                                <button class="btn btn-search" type="submit"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
 
                 </div>
             </div>
             <div class="latest_product_inner">
                 <div class="row">
                     <% products.forEach(product=> {%>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-product">
+                        <div id="<%= product.ProductName %>" class="col-lg-3 col-md-6 mt-2 products-items">
+                            <div class="single-product shadow rounded ">
                                 <div class="product-img">
-                                    <img style="height: 255px;" class="card-img" src="<%= product.Image %>" alt="" />
+                                    <img  class="card-img" src="<%= product.Image %>" alt="" />
                                     <div class="p_icon row justify-content-around flex-nowrap mx-auto"
                                         style="width: 100%;">
                                         <a href="/page/<%= product._id %>" class="col-3">
@@ -87,7 +91,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="product-btm">
+                                <div class="product-btm " style="height: 130px;">
                                     <a href="#" class="d-block">
                                         <h4>
                                             <%= product.ProductName %>
@@ -130,8 +134,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
-        </div>
     </div>
+</div>
 </div>
 
 <form name="delete-form" method="POST">

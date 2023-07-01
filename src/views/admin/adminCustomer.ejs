@@ -117,15 +117,15 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       // admin delete product
-      var productId
+      var cusID
       var deleteForm = document.forms['delete-form']
       var btnDelete = document.getElementById('btn-delete')
       $('#delete-post').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
-          productId = button.data('id')
+          cusID = button.data('id')
       })
       btnDelete.onclick = function () {
-          deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
+          deleteForm.action = '/admin/customer/' + cusID + '?_method=DELETE'
           deleteForm.submit()
       }
   })

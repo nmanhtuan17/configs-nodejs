@@ -5,14 +5,14 @@ import passport from 'passport'
 import initPassport from '../../controler/passportLocalCtrl'
 import loginCtrl from '../../controler/loginCtrl.js'
 
-router.get('/create', adminCtrl.getCreate)
+router.get('/create',loginCtrl.checkLoggedIn, adminCtrl.getCreate)
 router.post('/create', adminCtrl.postCreate)
 
 router.delete('/delete/:id', adminCtrl.postDeleteProduct) 
-router.get('/update/:id', adminCtrl.getUpdateProduct)
+router.get('/update/:id',loginCtrl.checkLoggedIn, adminCtrl.getUpdateProduct)
 router.put('/update/:id', adminCtrl.putUpdateProduct)
 
-router.get('/customer', adminCtrl.getCustomer)
+router.get('/customer',loginCtrl.checkLoggedIn, adminCtrl.getCustomer)
 router.delete('/customer/:id', adminCtrl.deleteCustomer)
-router.get('/', adminCtrl.getAdminPage)
+router.get('/',loginCtrl.checkLoggedIn, adminCtrl.getAdminPage)
 module.exports = router

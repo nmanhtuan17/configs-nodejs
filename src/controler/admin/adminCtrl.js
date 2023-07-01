@@ -86,8 +86,9 @@ let getCustomer = async (req, res) => {
     })
 }
 
-let deleteCustomer = ()=> {
-
+let deleteCustomer = async (req, res)=> {
+    await userModel.deleteOne({_id: req.params.id})
+    res.redirect('/admin/customer')
 }
 module.exports = {
     getAdminPage,
