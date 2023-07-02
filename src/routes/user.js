@@ -31,5 +31,6 @@ router.post('/cart/:id', cartCtrl.addToCart)
 
 
 router.get('/detail', userAccountCtrl.getAccount)
+router.put('/detail', userAccountCtrl.putUpdateProfile)
 
 module.exports = router

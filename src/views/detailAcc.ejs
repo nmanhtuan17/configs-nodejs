@@ -22,10 +22,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item order-list-nav active" href="#">
+                    <a class="list-group-item profile-setting-nav active" href="#">
+                        <i class="fa fa-user text-muted"></i>
+                        <span class="ms-1">Profile Settings</span>
+                    </a>
+                    <a class="list-group-item order-list-nav " href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fa fa-shopping-bag mr-1 text-muted"></i>
@@ -35,21 +39,18 @@
                             </div><span class="badge badge-secondary">6</span>
                         </div>
                     </a>
-                    <a class="list-group-item profile-setting-nav" href="#">
-                        <i class="fa fa-user text-muted"></i>
-                        <span class="ms-1">Profile Settings</span>
-                    </a>
+
                     <!-- <a class="list-group-item" href="#">
                         <i class="fa fa-map-marker text-muted"></i>
                         <span class="ms-1">Address</span>
                     </a> -->
-                    
-                    
+
+
                 </nav>
             </div>
         </div>
         <!-- Orders Table-->
-        <div class="col-lg-8 pb-5 " id="orders-table">
+        <div class="col-lg-8 pb-5 " id="orders-table" style="display: none;">
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
                     <thead>
@@ -104,39 +105,42 @@
 
 
         <!-- Profile setting -->
-        <div id="profile-setting" class="col-lg-8 pb-5 "style="display: none;">
-            <form method="post" class="row">
+        <div id="profile-setting" class="col-lg-8 pb-5 ">
+            <form method="post" class="row" action="/user/detail?_method=PUT">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">Full Name</label>
-                        <input class="form-control" type="text" id="account-fn" value="<%= user.Fullname %>" required="" name="fullname">
+                        <input class="form-control" type="text" id="account-fn" value="<%= user.Fullname %>" required
+                            name="fullname">
                     </div>
                 </div>
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email" value="<%= user.Email %>" disabled="" name="email">
+                        <input class="form-control" type="email" id="account-email" value="<%= user.Email %>"
+                            disabled="" name="email" required>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required="" name="phoneNumber">
+                        <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72"
+                            required="" name="phoneNumber">
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="account-pass">New Password</label>
-                        <input class="form-control" type="password" id="account-pass" name="password">
+                        <label for="account-pass">Password</label>
+                        <input class="form-control" type="password" id="account-pass" name="password" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="account-confirm-pass">Confirm Password</label>
-                        <input class="form-control" type="password" id="account-confirm-pass" name="confirmPassword">
+                        <label for="account-confirm-pass">New Password</label>
+                        <input class="form-control" type="password" id="account-confirm-pass" name="newpassword">
                     </div>
                 </div>
                 <div class="col-12">
@@ -146,35 +150,79 @@
                             <input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
                             <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
                         </div>
-                        <button class="btn btn-style-1 btn-primary" type="submit" >Update Profile</button>
+                        <button class="btn btn-style-1 btn-primary btn-update-profile" type="submit">Update
+                            Profile</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<% if (message.length !==0) {%>
+    <div class="alert alert-success position-absolute top-0 end-0"
+        style=" z-index: 110;transform: translate(-33px, 85px);" role="alert" id="alertCheckout">
+        <div style="display: inline-block;">
+            <%= message %>
+        </div>
 
-<script>
-    var orderListNav = document.querySelector('.order-list-nav')
-    var profileSettingNav = document.querySelector('.profile-setting-nav')
-    var orderTable = document.getElementById('orders-table')
-    var profileSetting = document.getElementById('profile-setting')
+    </div>
+    </section>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+    <%} %>
 
-    
-    orderListNav.addEventListener('click', ()=>{
-        orderListNav.classList.add('active')
-        profileSettingNav.classList.remove('active')
-        orderTable.style.display = ''
-        profileSetting.style.display = 'none'
-    })
-    profileSettingNav.addEventListener('click', ()=>{
-        profileSettingNav.classList.add('active')
-        orderListNav.classList.remove('active')
-        orderTable.style.display = 'none'
-        profileSetting.style.display = ''
-    })
-</script>
 
-<footer>
-    <%- include('./partials/footer') %>
-</footer>
+        <script>
+            var btn = document.querySelector(".btn-update-profile");
+            var successMessage = document.getElementById("alertCheckout");
+            setTimeout(function () {
+                successMessage.style.display = "none";
+            }, 2000);
+    // Bắt sự kiện click vào nút đặt hàng
+    // btn.addEventListener("click", function () {
+    //     // Hiển thị thông báo thành công
+    //     successMessage.style.display = "inline-block";
+
+    //     // Đợi một khoảng thời gian (ví dụ: 3 giây) và tự động đóng thông báo
+    //     setTimeout(function () {
+    //         successMessage.style.display = "none";
+    //     }, 2000);
+    // });
+
+        </script>
+        <script>
+            var orderListNav = document.querySelector('.order-list-nav')
+            var profileSettingNav = document.querySelector('.profile-setting-nav')
+            var orderTable = document.getElementById('orders-table')
+            var profileSetting = document.getElementById('profile-setting')
+
+
+            orderListNav.addEventListener('click', () => {
+                orderListNav.classList.add('active')
+                profileSettingNav.classList.remove('active')
+                orderTable.style.display = ''
+                profileSetting.style.display = 'none'
+            })
+            profileSettingNav.addEventListener('click', () => {
+                profileSettingNav.classList.add('active')
+                orderListNav.classList.remove('active')
+                orderTable.style.display = 'none'
+                profileSetting.style.display = ''
+            })
+        </script>
+
+        <footer>
+            <%- include('./partials/footer') %>
+        </footer>

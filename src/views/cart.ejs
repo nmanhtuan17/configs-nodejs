@@ -54,13 +54,15 @@
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="number" name="quantity" id="sst" class="product-sst" maxlength="12" value="<%= product.Quantity %>" title="Quantity:"
-                                            class="input-text qty" />
+                                        <input type="number" name="quantity" id="sst" class="product-sst" maxlength="12" value="<%= product.Quantity %>" data-id="<%= product._id %>" > title="Quantity:"
+                                            class="input-text qty"/>
                                     </div>
                                 </td>
                                 
                                 <td>
-                                    <h5 style="display: inline-block;"><%= (parseFloat(product.Price) * product.Quantity).toFixed(6)  %></h5>
+                                    <h5 class="total" style="display: inline-block;">
+                                        <%# (parseFloat(product.Price) * product.Quantity).toFixed(6)  %>
+                                    </h5>
                                     
                                     <i class="fa-solid fa-dong-sign"></i>
                                 </td>
@@ -77,7 +79,7 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5 style="display: inline-block;"><%= total %></h5>
+                                <h5 class="sub-total" style="display: inline-block;"><%= total %></h5>
                                 <i class="fa-solid fa-dong-sign"></i>
                             </td>
                         </tr>
@@ -88,7 +90,7 @@
                             <td>
                                 <div class="checkout_btn_inner">
                                     <a class="gray_btn" href="/">Continue Shopping</a>
-                                    <a class="main_btn" href="/page/">Proceed to checkout</a>
+                                    <a class="checkout-btn main_btn" href="/page/checkout">Proceed to checkout</a>
                                 </div>
                             </td>
                         </tr>
@@ -128,6 +130,7 @@
 <form name="delete-form" method="POST">
 </form>
 
+<form name="quantity" method="post"></form>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // admin delete product
@@ -143,5 +146,39 @@
             deleteForm.action = '/page/cart/' + productId + '?_method=DELETE'
             deleteForm.submit()
         }
+
+
+        // tính tiền
+        var qtys = document.querySelectorAll('.product-sst')
+        var totals = document.querySelectorAll('.total')
+        var productPrices = document.querySelectorAll('.product-price')
+        var subTotal = document.querySelector('.sub-total')
+        
+        for (let i = 0; i < qtys.length; i++) {
+            totals[i].innerText = (parseFloat(productPrices[i].innerText) * qtys[i].value).toFixed(6)
+            qtys[i].addEventListener('click', ()=>{
+                totals[i].innerText = (parseFloat(productPrices[i].innerText) * qtys[i].value).toFixed(6)
+                calTotal()
+                
+            })
+        }
+        function calTotal (){
+            let tempTotal = 0
+            totals.forEach((total) => {
+                tempTotal += parseFloat(total.innerText)
+            })
+            subTotal.innerText = tempTotal.toFixed(6)
+        }
+
+
+        // update quantity
+        var productCartId
+        var updateQtyForm = document.forms['update-quatity']
+        var checkoutBtn = document.querySelector('.checkout-btn')
+        var qtyInputs = document.querySelectorAll('.product-sst')
+
+        qtyInputs.forEach((el)=>{
+            productCartId = el.getAttribute('data-id')
+        })
     })
 </script>

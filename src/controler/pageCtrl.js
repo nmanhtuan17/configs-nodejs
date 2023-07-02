@@ -44,7 +44,7 @@ let getCart = async (req, res) => {
 
 }
 
-//get /page/
+//get /page/checkout
 let getCheckout = async (req, res) => {
     var orders = []
     var total = 0
@@ -62,10 +62,16 @@ let getCheckout = async (req, res) => {
             user: req.user,
             countCart: orders.length,
             orders: orders,
-            total: total.toFixed(6)
+            total: total.toFixed(6),
+            message: req.flash('msg')
         })
 }
 
+//post /page/checkout
+let postCheckout= (req, res) =>{
+    req.flash('msg', 'Đặt hàng thành công')
+    res.redirect('/page/checkout')
+}
 
 // DELETE /page/cart/:id
 let deleteProductFromCart = async (req, res) => {
@@ -76,6 +82,7 @@ module.exports = {
     getSingleProduct,
     getCart,
     getCheckout,
-    deleteProductFromCart
+    deleteProductFromCart,
+    postCheckout
 
 }

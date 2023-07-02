@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     var btnSearch = document.querySelector('.btn-search')
+    var inputSearch = document.querySelector('.inputSearch')
     function search(){
-        var inputSearch = document.querySelector('.inputSearch')
         var productItems = document.querySelectorAll('.products-items')
         
         var filter = inputSearch.value.toUpperCase()
@@ -18,5 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
     
-    btnSearch.addEventListener('click', search)
+    inputSearch.addEventListener('input', search)
 })
