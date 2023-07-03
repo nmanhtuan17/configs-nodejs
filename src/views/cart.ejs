@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% products.forEach(product => { %>
+                        <% carts.forEach(product => { %>
                             
                             <tr>
                                 <td>
@@ -54,8 +54,10 @@
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="number" name="quantity" id="sst" class="product-sst" maxlength="12" value="<%= product.Quantity %>" data-id="<%= product._id %>" > title="Quantity:"
-                                            class="input-text qty"/>
+                                        <form class="update-quantity" method="post" action="/page/cart/<%= product._id %>?_method=PUT">
+                                            <input type="number" name="quantity" id="sst" class="product-sst" maxlength="12" value="<%= product.Quantity %>" title="Quantity:"
+                                                class="input-text qty"/>
+                                        </form>
                                     </div>
                                 </td>
                                 
@@ -72,6 +74,7 @@
                                 
                             </tr>
                         <% }) %>
+                        <% if (carts.length > 0) { %>
                         <tr>
                             <td></td>
                             <td></td>
@@ -90,10 +93,13 @@
                             <td>
                                 <div class="checkout_btn_inner">
                                     <a class="gray_btn" href="/">Continue Shopping</a>
-                                    <a class="checkout-btn main_btn" href="/page/checkout">Proceed to checkout</a>
-                                </div>
-                            </td>
-                        </tr>
+                                    
+                                        <a class="checkout-btn main_btn" href="/page/checkout">Proceed to checkout</a>
+                                     
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } %>
                     </tbody>
                 </table>
             </div>
@@ -129,8 +135,6 @@
   </div>
 <form name="delete-form" method="POST">
 </form>
-
-<form name="quantity" method="post"></form>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // admin delete product
@@ -169,16 +173,14 @@
             })
             subTotal.innerText = tempTotal.toFixed(6)
         }
+        // submit form update quantity
+        var updateQtyForms = document.querySelectorAll('.update-quantity')
 
-
-        // update quantity
-        var productCartId
-        var updateQtyForm = document.forms['update-quatity']
-        var checkoutBtn = document.querySelector('.checkout-btn')
-        var qtyInputs = document.querySelectorAll('.product-sst')
-
-        qtyInputs.forEach((el)=>{
-            productCartId = el.getAttribute('data-id')
-        })
+        for (let i = 0; i < qtys.length; i++) {
+            qtys[i].addEventListener('click', ()=>{
+                updateQtyForms[i].submit()
+            })
+        }
+        
     })
 </script>

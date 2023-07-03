@@ -1,18 +1,22 @@
 import cartModel from '../models/cart'
 import { userModel } from '../models/products'
+import orderModel from '../models/orders'
 // GET /user/detail
 let getAccount = async (req, res) => {
+    var carts = []
     var orders = []
     if (req.isAuthenticated()) {
         let userLogin = req.user
-        orders = await cartModel.find({ Username: userLogin.Username })
+        carts = await cartModel.find({ Username: userLogin.Username })
+        orders = await orderModel.find({ Customer: userLogin.Username })
     }
     res.render('detailAcc.ejs', {
         title: 'Tài khoản',
         isLogin: req.isAuthenticated(),
         user: req.user,
-        countCart: orders.length,
+        countCart: carts.length,
         message: req.flash('msg'),
+        orders: orders,
     })
 }
 

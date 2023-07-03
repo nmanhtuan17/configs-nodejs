@@ -72,26 +72,30 @@
           <th scope="col">Sản phẩm</th>
           <th scope="col">Khách hàng</th>
           <th scope="col">Địa chỉ</th>
+          <th scope="col">Thời gian</th>
           <th scope="col">Số lượng</th>
-          <th scope="col">Giá</th>
+          <th scope="col">Thanh toán</th>
+          <th scope="col">Phương thức thanh toán</th>
           <th scope="col">Trạng Thái</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% products.forEach(product => { %>
+        <% orders.forEach(order => { %>
           
           <tr>
             <th scope="row"><%= stt++ %></th>
-            <td><%= product.ProductName %></td>
-            <td><%= Math.random() * (99999999999999999 - 1000000000) + 1000000000 %></td>
-            <td>xyzahoiqwnlsnlw</td>
-            <td>1</td>
-            <td><%= product.Price %><i class="fa-solid fa-dong-sign"></i></td>
-            <td>Đang giao hàng</td>
+            <td><%= order.ProductName %></td>
+            <td><%= order.Fullname %></td>
+            <td><%= order.Address  %></td>
+            <td><%= order.Date %></td>
+            <td><%= order.Quantity %></td>
+            <td><%= (order.Total.toFixed(6)) %><i class="fa-solid fa-dong-sign"></i></td>
+            <td><%= order.PaymentMethod  %></td>
+            <td><%= order.Status %></td>
             <td>
-              <a href="/admin/update/<%= product._id %>" class="p-2">Sửa</a>
-              <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= product._id %>">Xóa</a>
+              <a href="/admin/update/<%= order._id %>" class="p-2">Sửa</a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= order._id %>">Xóa</a>
             </td>
           </tr>
           

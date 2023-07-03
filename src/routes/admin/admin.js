@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
 import adminCtrl from '../../controler/admin/adminCtrl.js'
-import passport from 'passport'
-import initPassport from '../../controler/passportLocalCtrl'
 import loginCtrl from '../../controler/loginCtrl.js'
 
 router.get('/create',loginCtrl.checkLoggedIn, adminCtrl.getCreate)

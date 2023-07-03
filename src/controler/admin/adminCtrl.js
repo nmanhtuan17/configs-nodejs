@@ -1,9 +1,9 @@
 import { productModel } from "../../models/products";
 import { userModel } from "../../models/products";
-
+import orderModel from '../../models/orders'
 // Get /admin/
 let getAdminPage = async (req, res) => {
-    let allProduct = await productModel.find({})
+    var allProduct = await productModel.find({})
     var stt = 1
     res.render('admin/adminPage', {
         title: 'Admin page',
@@ -94,13 +94,14 @@ let deleteCustomer = async (req, res)=> {
 
 // GET /admin/orders
 let getOrders = async (req, res) => {
-    let allProduct = await productModel.find({})
+    
+    var orders = await orderModel.find({})
     var stt = 1
     res.render('admin/adminOrders', {
         title: 'Đơn hàng',
         isLogin: req.isAuthenticated(),
         user: req.user,
-        products: allProduct,
+        orders: orders,
         stt: stt,
     })
 }
