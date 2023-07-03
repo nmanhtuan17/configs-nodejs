@@ -81,7 +81,12 @@
         <tr>
           <th scope="row"><%= stt++ %></th>
           <td><%= product.ProductName %></td>
-          <td><%= product.Quantity %></td>
+          <% if (product.Quantity > 0) { %>
+            <td><%= product.Quantity %></td>
+          <% } else { %>
+            <td><span class="badge badge-danger m-0">Hết hàng</span></td>
+            <% } %>
+          
           <td><%= product.Price %><i class="fa-solid fa-dong-sign"></i></td>
           <td>
             <a href="/admin/update/<%= product._id %>" class="p-2">Sửa</a>
