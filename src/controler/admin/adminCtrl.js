@@ -1,12 +1,32 @@
 import { productModel } from "../../models/products";
 import { userModel } from "../../models/products";
 import orderModel from '../../models/orders'
-// Get /admin/
-let getAdminPage = async (req, res) => {
+
+
+// get /admin/
+let getAdmin = async (req, res)=> {
+    let allOrders = await orderModel.find({})
+    var total = 0
+    let allUsers = await userModel.find({})
+    allOrders.forEach((el)=>{
+        total += el.Total
+    })
+    res.render('admin/adminPage',
+    {
+        title: 'Admin',
+        isLogin: req.isAuthenticated(),
+        user: req.user,
+        orders: allOrders,
+        total: total,
+        allUsers: allUsers
+    })
+}
+// Get /admin/products
+let getAdminProduct = async (req, res) => {
     var allProduct = await productModel.find({})
     var stt = 1
-    res.render('admin/adminPage', {
-        title: 'Admin page',
+    res.render('admin/adminProduct', {
+        title: 'Product',
         isLogin: req.isAuthenticated(),
         user: req.user,
         products: allProduct,
@@ -18,7 +38,7 @@ let getAdminPage = async (req, res) => {
 
 let postDeleteProduct = async (req, res) => {
     await productModel.deleteOne({_id: req.params.id})
-    res.redirect('/')
+    res.redirect('/admin/products')
 }
 
 //get /admin/create
@@ -27,7 +47,7 @@ let getCreate = (req, res) =>
 {
 
     res.render('admin/adminCreate.ejs', {
-        title: 'Create',
+        title: 'Thêm sản phẩm',
         isLogin: req.isAuthenticated(),
         user: req.user,
         message: req.flash('msg')
@@ -51,7 +71,7 @@ let postCreate = async (req, res) => {
 let getUpdateProduct = async (req, res) => {
     var productUpdate = await productModel.findById({_id: req.params.id})
     res.render('admin/adminUpdate', {
-        title: 'Update',
+        title: 'Cập nhật sản phẩm',
         message: req.flash('msg'),
         productUpdate: productUpdate
     })
@@ -69,7 +89,7 @@ let putUpdateProduct = async (req, res) => {
 
     await prod.save()
     req.flash('msg', 'Cập nhật thành công')
-    res.redirect('/admin')
+    res.redirect('/admin/products')
 }
 
 
@@ -78,7 +98,7 @@ let getCustomer = async (req, res) => {
     let allUsers = await userModel.find({})
     var stt = 1
     res.render('admin/adminCustomer', {
-        title: 'Users',
+        title: 'QL người dùng',
         isLogin: req.isAuthenticated(),
         user: req.user,
         allUsers: allUsers,
@@ -106,7 +126,8 @@ let getOrders = async (req, res) => {
     })
 }
 module.exports = {
-    getAdminPage,
+    getAdmin,
+    getAdminProduct,
     postDeleteProduct,
     getCreate,
     postCreate,

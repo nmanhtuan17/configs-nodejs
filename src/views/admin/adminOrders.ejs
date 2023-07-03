@@ -18,7 +18,10 @@
               <div class="col-lg-7 pr-0">
                 <ul class="nav navbar-nav center_nav pull-right">
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin/">Kho hàng</a>
+                    <a class="nav-link" href="/admin/">QL Doanh thu</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/products">Kho hàng</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/admin/orders">Đơn hàng</a>
@@ -72,6 +75,7 @@
           <th scope="col">Sản phẩm</th>
           <th scope="col">Khách hàng</th>
           <th scope="col">Địa chỉ</th>
+          <th scope="col">Điện thoại</th>
           <th scope="col">Thời gian</th>
           <th scope="col">Số lượng</th>
           <th scope="col">Thanh toán</th>
@@ -88,6 +92,7 @@
             <td><%= order.ProductName %></td>
             <td><%= order.Fullname %></td>
             <td><%= order.Address  %></td>
+            <td><%= order.Phone  %></td>
             <td><%= order.Date %></td>
             <td><%= order.Quantity %></td>
             <td><%= (order.Total.toFixed(6)) %><i class="fa-solid fa-dong-sign"></i></td>

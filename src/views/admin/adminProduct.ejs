@@ -18,7 +18,7 @@
             <div class="col-lg-7 pr-0">
               <ul class="nav navbar-nav center_nav pull-right">
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/">Ql Doanh thu</a>
+                  <a class="nav-link" href="/admin/">QL Doanh thu</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/admin/products">Kho hàng</a>
@@ -27,7 +27,7 @@
                   <a class="nav-link" href="/admin/orders">Đơn hàng</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/customer">QL Người Dùng</a>
+                  <a class="nav-link" href="/admin/customer">QL Người dùng</a>
                 </li>
               </ul>
             </div>
@@ -72,28 +72,39 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Tài khoản</th>
-        <th scope="col">Mật khẩu</th>
-        <th scope="col">Email</th>
-        <th scope="col">Admin</th>
+        <th scope="col">Sản phẩm</th>
+        <th scope="col">Số lượng</th>
+        <th scope="col">Giá</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% allUsers.forEach(el => { %>
+      <% products.forEach(product => { %>
         
         <tr>
           <th scope="row"><%= stt++ %></th>
-          <td><%= el.Username %></td>
-          <td><%= el.Password %></td>
-          <td><%= el.Email %></td>
-          <td><%= el.Admin %></td>
+          <td><%= product.ProductName %></td>
+          <% if (product.Quantity > 0) { %>
+            <td><%= product.Quantity %></td>
+          <% } else { %>
+            <td><span class="badge badge-danger m-0">Hết hàng</span></td>
+            <% } %>
+          
+          <td><%= product.Price %><i class="fa-solid fa-dong-sign"></i></td>
           <td>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= el._id %>">Xóa</a>
+            <a href="/admin/update/<%= product._id %>" class="p-2">Sửa</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= product._id %>">Xóa</a>
           </td>
         </tr>
         
       <% }) %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="/admin/create" class="p-2">Add <i class="fa-solid fa-plus fa-xs"></i></a></td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -120,15 +131,15 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       // admin delete product
-      var cusID
+      var productId
       var deleteForm = document.forms['delete-form']
       var btnDelete = document.getElementById('btn-delete')
       $('#delete-post').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
-          cusID = button.data('id')
+          productId = button.data('id')
       })
       btnDelete.onclick = function () {
-          deleteForm.action = '/admin/customer/' + cusID + '?_method=DELETE'
+          deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
           deleteForm.submit()
       }
   })
