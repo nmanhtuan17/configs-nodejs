@@ -87,7 +87,15 @@
           <td><%= el.Username %></td>
           <td><%= el.Password %></td>
           <td><%= el.Email %></td>
-          <td><%= el.Admin %></td>
+          <td>
+            <form class="post-status" method="post" action="/admin/customer/<%= el._id %>?_method=PUT">
+              <select name="admin" class="status-select" >
+                <option value="<%= el.Admin %>"><%= el.Admin %></option>
+                <option value="1">true</option>
+                <option value="0">false</option>
+              </select>
+            </form>
+          </td>
           <td>
             <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= el._id %>">Xóa</a>
           </td>
@@ -131,5 +139,15 @@
           deleteForm.action = '/admin/customer/' + cusID + '?_method=DELETE'
           deleteForm.submit()
       }
+
+
+      var selectStatus = document.querySelectorAll('.status-select')
+        selectStatus.forEach((el)=>{
+          var formPostStatus = el.parentElement
+          el.onchange = function(){
+            formPostStatus.submit()
+
+          }
+        })
   })
 </script>

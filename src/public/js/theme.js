@@ -207,16 +207,16 @@
         $("#slider-range").slider({
             range: true,
             min: 0,
-            max: 500,
-            values: [10, 500],
+            max: 100,
+            values: [0, 30],
             slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " $" + ui.values[1]);
+                $("#amount").val(ui.values[0] + "tr vnđ     " + ui.values[1] + "tr vnđ ");
             }
         });
     }
     if ($("#amount").length > 0) {
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            "   $" + $("#slider-range").slider("values", 1));
+        $("#amount").val($("#slider-range").slider("values", 0) +
+            "tr vnđ     " + $("#slider-range").slider("values", 1) + "tr vnđ");
     }
 
 

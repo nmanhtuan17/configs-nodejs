@@ -97,9 +97,19 @@
             <td><%= order.Quantity %></td>
             <td><%= (order.Total.toFixed(6)) %><i class="fa-solid fa-dong-sign"></i></td>
             <td><%= order.PaymentMethod  %></td>
-            <td><%= order.Status %></td>
             <td>
-              <a href="/admin/update/<%= order._id %>" class="p-2">Sửa</a>
+              <form class="post-status" method="post" action="/admin/orders/<%= order._id %>?_method=PUT">
+                <select name="status" class="status-select" >
+                  <option value="Chờ xác nhận"><%= order.Status %></option>
+                  <option value="Chờ xác nhận">Chờ xác nhận</option>
+                  <option value="Đang giao hàng">Đang giao hàng</option>
+                  <option value="Giao hàng thành công">Giao hàng thành công</option>
+                </select>
+              </form>
+            </td>
+            
+            
+            <td>
               <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post" data-id="<%= order._id %>">Xóa</a>
             </td>
           </tr>
@@ -142,5 +152,15 @@
             deleteForm.action = '/admin/delete/' + productId + '?_method=DELETE'
             deleteForm.submit()
         }
+
+
+        var selectStatus = document.querySelectorAll('.status-select')
+        selectStatus.forEach((el)=>{
+          var formPostStatus = el.parentElement
+          el.onchange = function(){
+            formPostStatus.submit()
+
+          }
+        })
     })
   </script>

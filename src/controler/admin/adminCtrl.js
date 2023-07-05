@@ -111,7 +111,12 @@ let deleteCustomer = async (req, res)=> {
     res.redirect('/admin/customer')
 }
 
-
+let putCustomer = async (req, res) => {
+    let ctm = await userModel.findById({_id: req.params.id})
+    ctm.Admin = req.body.admin
+    await ctm.save()
+    res.redirect('/admin/customer')
+}
 // GET /admin/orders
 let getOrders = async (req, res) => {
     
@@ -125,6 +130,15 @@ let getOrders = async (req, res) => {
         stt: stt,
     })
 }
+
+
+let putOrders = async (req, res) =>{
+    let order = await orderModel.findById({_id: req.params.id})
+    order.Status = req.body.status
+    order.save()
+    res.redirect('/admin/orders')
+}
+
 module.exports = {
     getAdmin,
     getAdminProduct,
@@ -135,5 +149,7 @@ module.exports = {
     putUpdateProduct,
     getCustomer,
     deleteCustomer,
-    getOrders
+    getOrders,
+    putOrders,
+    putCustomer
 }
