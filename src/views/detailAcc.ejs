@@ -36,7 +36,7 @@
                                 <div class="d-inline-block">
                                     Orders List
                                 </div>
-                            </div><span class="badge badge-secondary">6</span>
+                            </div><span class="badge badge-secondary"><%= orders.length  %></span>
                         </div>
                     </a>
 
@@ -69,7 +69,7 @@
                                 <td><%= order.Quantity %></td>
                                 <td><%= order.Address %></td>
                                 <td><span class="badge badge-danger m-0"><%= order.Status %></span></td>
-                                <td><span><%= (order.Total).toFixed(6) %></span></td>
+                                <td><span><%= (order.Total).toFixed(6) %></span><i class="fa-solid fa-dong-sign"></i></td>
                             </tr>
                         <% }) %>
                         

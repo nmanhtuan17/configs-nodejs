@@ -19,7 +19,7 @@ let addToCart = async (req, res) => {
             var newAddToCart = new cartModel({
                 ProductName: product.ProductName,
                 Price: product.Price,
-                Quantity: 1,
+                Quantity: req.body.qty,
                 Image: product.Image,
                 Description: product.Description,
                 Username: userLogin.Username
